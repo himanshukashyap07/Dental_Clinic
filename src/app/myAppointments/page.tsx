@@ -41,7 +41,7 @@ export default function MyAppointmentsPage() {
         async function fetchAppointments() {
             setIsLoading(true);
             try {
-                const response = await axios.get("/api/Booking/myAppointment");
+                const response = await axios.get("/api/booking/myAppointment");
                 setAppointments(response.data.Bookings || []);
             } catch (error) {
                 toast({

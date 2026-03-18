@@ -40,7 +40,7 @@ export default function BookPage() {
     const formData = new FormData(form);
     
     try {
-      const appointment = await axios.post("/api/Booking", {
+      const appointment = await axios.post("/api/booking", {
         firstName: formData.get("firstName"),
         lastName: formData.get("lastName"),
         phone: formData.get("phone"),

@@ -204,3 +204,120 @@ Made by [Himanshu Kashyap](https://github.com/himanshukashyap07)
 
 </div>
 ```
+
+
+
+
+
+
+
+
+<Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>Username</TableHead>
+                                            <TableHead>Mobile</TableHead>
+                                            <TableHead>Total</TableHead>
+                                            <TableHead>Payments</TableHead>
+                                            <TableHead>Status</TableHead>
+                                            <TableHead>Treatments</TableHead>
+                                            <TableHead className="text-right">Actions</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {payments.map((payment) => {
+                                            return (
+                                                <TableRow key={payment._id}>
+                                                    <TableCell>{payment.username}</TableCell>
+                                                    <TableCell>{payment.mobileNumber}</TableCell>
+                                                    <TableCell>₹{payment.totalAmount.toFixed(2)}</TableCell>
+
+                                                    <TableCell>
+                                                        {
+                                                            payment.amountPaid && (
+                                                                payment.amountPaid.map((amount, index) => (
+                                                                    <div className="font-medium" key={index}>
+                                                                        ₹{amount.amount.toFixed(2)} on {new Date(amount.date).toLocaleDateString()}
+                                                                    </div>
+                                                                ))
+                                                            )
+                                                        }
+                                                    </TableCell>
+                                                    <TableCell className="capitalize">{payment.paymentStatus}</TableCell>
+                                                    <TableCell>
+                                                        {payment.treatements && payment.treatements.map((treatment, index) => (
+                                                            <div key={index}>
+                                                                <p>{treatment.treatmentName} on {new Date(treatment.date).toLocaleDateString()}</p>
+                                                                <p className="text-sm text-muted-foreground">{treatment.description}</p>
+                                                            </div>
+                                                        ))}
+                                                    </TableCell>
+                                                    <TableCell className="text-right">
+                                                        <div className="flex justify-end flex-wrap gap-2">
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                onClick={() => {
+                                                                    setSelectedPayment(payment);
+                                                                    setIsAddPaymentOpen(true);
+                                                                    setSelectedPaymentEntryId(null);
+                                                                }}
+                                                            >
+                                                                Add payment
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                onClick={() => {
+                                                                    setSelectedPayment(payment);
+                                                                    setSelectedPaymentEntryId(null);
+                                                                    setIsEditPaymentOpen(true);
+                                                                }}
+                                                            >
+                                                                Edit payment
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                onClick={() => {
+                                                                    setSelectedPayment(payment);
+                                                                    setIsAddTreatmentOpen(true);
+                                                                    setSelectedTreatmentId(null);
+                                                                }}
+                                                            >
+                                                                Add treatment
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                onClick={() => {
+                                                                    setSelectedPayment(payment);
+                                                                    setSelectedTreatmentId(null);
+                                                                    setIsEditTreatmentOpen(true);
+                                                                }}
+                                                            >
+                                                                Edit treatment
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="outline"
+                                                                onClick={() => {
+                                                                    handleUpdatePaymentStatus(payment, payment.paymentStatus === "Pending" ? "Completed" : "Pending");
+                                                                }}
+                                                            >
+                                                                update status
+                                                            </Button>
+                                                            <Button
+                                                                size="sm"
+                                                                variant="destructive"
+                                                                onClick={() => handleDeleteUser(payment)}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>

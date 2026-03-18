@@ -54,7 +54,7 @@ export default function AdminDashboard() {
     // Fetch appointments only if user is admin
     async function fetchAppointments() {
       setIsLoading(true);
-      const appointments = await axios.get("/api/Booking");
+      const appointments = await axios.get("/api/booking");
       setAppointments(appointments.data.Bookings);
       setIsLoading(false);
     }
@@ -63,7 +63,7 @@ export default function AdminDashboard() {
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
-      await axios.patch(`/api/Booking/${id}`, { status: newStatus });
+      await axios.patch(`/api/booking/${id}`, { status: newStatus });
       toast({
         title: "Status Updated, hit a refresh to see the changes",
         description: `Appointment marked as ${newStatus}.`,
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
 
   const deleteAppointment = async (id: string) => {
     try {
-      await axios.patch(`/api/Booking/${id}`, { status: "Deleted" });
+      await axios.patch(`/api/booking/${id}`, { status: "Deleted" });
       toast({
         title: "Deleted, hit a refresh to see the changes",
         description: "Record removed successfully.",
